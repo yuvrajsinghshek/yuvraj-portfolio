@@ -1,73 +1,107 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const SYSTEM_PROMPT = `You are Yuvraj's personal AI portfolio assistant. You represent Yuvraj Singh Shekhawat and help visitors learn about him in a friendly, professional, and engaging way.
+const KNOWLEDGE_BASE = {
+  greetings: {
+    keywords: ['hi', 'hello', 'hey', 'greetings', 'morning', 'evening', 'how are you', 'howdy', 'what\'s up', 'sup'],
+    responses: [
+      "Hello! I'm Yuvraj's AI assistant. How can I help you today? 😊",
+      "Hi there! I represent Yuvraj Singh Shekhawat. Feel free to ask me about his projects, skills, or experience!",
+      "Hey! I'm doing great, thanks for asking! I'm here to tell you everything about my boss, Yuvraj. What would you like to know?"
+    ]
+  },
+  about: {
+    keywords: ['who is yuvraj', 'about yuvraj', 'tell me about him', 'yuvraj singh shekhawat'],
+    response: "Yuvraj Singh Shekhawat is an aspiring **Data Scientist** and **MCA (Data Science)** student at Lovely Professional University. He is passionate about turning data into stories and solving business problems with AI. Currently, he is a Data Science Trainee at WE RNS IT Solutions."
+  },
+  project_nlp: {
+    keywords: ['travel', 'guid', 'nlp chatbot'],
+    response: "Yuvraj's **NLP-Based Travel Guide Chatbot** uses tokenisation, embeddings, and intent recognition to assist users with travel queries. It's a great example of his work in Conversational AI."
+  },
+  project_movie: {
+    keywords: ['movie', 'revenue', 'recommend'],
+    response: "Yuvraj developed a **Movie Revenue Prediction & Recommendation System** using ML regression and collaborative filtering. He even built a Streamlit app for it! [View on GitHub](https://github.com/yuvrajsinghshek/movie-recommendation-system-streamlit)"
+  },
+  project_laptop: {
+    keywords: ['laptop', 'price'],
+    response: "In the **Laptop Price Prediction & Recommendation** project, Yuvraj built an end-to-end ML pipeline with a Streamlit interface to estimate prices based on hardware specifications. [View on GitHub](https://github.com/yuvrajsinghshek/laptop_price_prediction)"
+  },
+  project_hotel: {
+    keywords: ['hotel', 'booking', 'cancellation'],
+    response: "Yuvraj analyzed **Hotel Booking Cancellations** using EDA and statistical analysis to uncover the main reasons behind booking changes. [View on GitHub](https://github.com/yuvrajsinghshek/Hotel-Booking-Analysis)"
+  },
+  skill_python: {
+    keywords: ['python', 'numpy', 'pandas', 'scikit', 'programming'],
+    response: "Yuvraj is highly proficient in **Python** for data science, using tools like NumPy and Pandas. He also has a strong foundation in C and JavaScript."
+  },
+  skill_sql: {
+    keywords: ['sql', 'mysql', 'postgre', 'database'],
+    response: "Yuvraj has master-level **SQL** skills (MySQL, PostgreSQL) and is certified from HackerRank across all levels (Basic to Advanced)."
+  },
+  skill_ml: {
+    keywords: ['ml', 'machine learning', 'deep learning', 'nlp', 'vision', 'transformer', 'llm', 'frameworks & tools'],
+    response: "Yuvraj specializes in **AI & ML**, including Deep Learning, NLP (Transformers/LLMs), and frameworks like TensorFlow. He is also skilled in data visualization using Power BI and Tableau."
+  },
+  skills: {
+    keywords: ['skill', 'tech', 'stack', 'language', 'data science'],
+    response: "Yuvraj is a multi-talented Data Scientist with expertise in Python, SQL, Machine Learning, and NLP. He uses a variety of tools like TensorFlow, Power BI, and Tableau to solve problems."
+  },
+  projects: {
+    keywords: ['project', 'github', 'work'],
+    response: "Yuvraj has completed several projects including Movie Revenue Prediction, Laptop Price Predictor, and Hotel Booking Analysis. You can explore all of them on his [GitHub](https://github.com/yuvrajsinghshek)!"
+  },
+  experience: {
+    keywords: ['experience', 'work', 'job', 'internship', 'rns', 'role', 'responsibilities'],
+    response: "Currently, Yuvraj is a **Data Science Trainee** at **WE RNS IT Solutions Pvt. Ltd.** in Jaipur. He focuses on data-driven projects and has prior experience in collaborative environments."
+  },
+  education: {
+    keywords: ['education', 'college', 'university', 'mca', 'degree', 'ba', 'school', 'previous degrees', 'mca details'],
+    response: "Yuvraj is pursuing his **MCA in Data Science** at Lovely Professional University. He holds a **Bachelor of Arts** from the University of Rajasthan and a strong school background in Physics, Chemistry, and Maths."
+  },
+  certifications: {
+    keywords: ['certificate', 'certify', 'coursera', 'hackerrank', 'deeplearning.ai'],
+    response: "Yuvraj has earned certificates in Supervised ML, Advanced Learning Algorithms, and Unsupervised Learning from Stanford & DeepLearning.AI, plus SQL/Python certs from HackerRank."
+  },
+  contact: {
+    keywords: ['contact', 'email', 'phone', 'linkedin', 'hire', 'call'],
+    response: "Feel free to reach out to Yuvraj:\n\n• **Email**: yuvrajshekhawat405@gmail.com\n• **LinkedIn**: [Yuvraj's Profile](https://www.linkedin.com/in/yuvraj-singh-shekhawat-155719316)\n• **GitHub**: [github.com/yuvrajsinghshek](https://github.com/yuvrajsinghshek)\n• **Phone**: +91-8955158901"
+  }
+};
 
-Here is everything about Yuvraj:
+const getBotResponse = (input) => {
+  const text = input.toLowerCase();
+  
+  // 1. Check for greetings first
+  if (KNOWLEDGE_BASE.greetings.keywords.some(k => text.includes(k))) {
+    return KNOWLEDGE_BASE.greetings.responses[Math.floor(Math.random() * KNOWLEDGE_BASE.greetings.responses.length)];
+  }
 
-PERSONAL INFO:
-- Full Name: Yuvraj Singh Shekhawat
-- Location: Jaipur, Rajasthan, India
-- Email: yuvrajshekhawat405@gmail.com
-- LinkedIn: https://www.linkedin.com/in/yuvraj-singh-shekhawat-155719316
-- GitHub: https://github.com/yuvrajsinghshek
-- Phone: +91-8955158901
+  // 2. Check for "Who is Yuvraj" specifically
+  if (KNOWLEDGE_BASE.about.keywords.some(k => text.includes(k))) {
+    return KNOWLEDGE_BASE.about.response;
+  }
 
-CURRENT ROLE:
-- Data Science Trainee at WE RNS IT Solutions Pvt. Ltd. (Tips-G, RNS Group) — June 2024 to Present (Jaipur)
+  // 3. Check for specific projects and skills
+  const specificCategories = [
+    'project_nlp', 'project_movie', 'project_laptop', 'project_hotel',
+    'skill_python', 'skill_sql', 'skill_ml'
+  ];
+  for (const cat of specificCategories) {
+    if (KNOWLEDGE_BASE[cat].keywords.some(k => text.includes(k))) {
+      return KNOWLEDGE_BASE[cat].response;
+    }
+  }
 
-EDUCATION:
-- MCA (Master of Computer Applications) in Data Science — Lovely Professional University, July 2024–Present
-- Bachelor of Arts — University of Rajasthan, 2021–2024
-- Senior Secondary (XII) — RBSE, 2020–2021, Percentage: 87%
-- Background in PCM (Physics, Chemistry, Maths)
+  // 4. Check for general categories
+  const generalCategories = ['skills', 'projects', 'experience', 'education', 'certifications', 'contact'];
+  for (const cat of generalCategories) {
+    if (KNOWLEDGE_BASE[cat].keywords.some(k => text.includes(k))) {
+      return KNOWLEDGE_BASE[cat].response;
+    }
+  }
 
-SKILLS:
-- Programming: Python (NumPy, Pandas, Matplotlib, Seaborn, Scikit-learn, SciPy), SQL (MySQL, PostgreSQL), C, JavaScript, HTML, CSS
-- ML/DL/NLP/GenAI: Machine Learning, Deep Learning, Natural Language Processing, Transformers, LLM Fundamentals, Computer Vision (basics)
-- Frameworks & Tools: TensorFlow, Streamlit, Git, GitHub, Jupyter Notebook
-- Data & Visualization: MS Excel, Power BI, Tableau, EDA, Statistical Analysis
-- Soft Skills: Problem Solving, Analytical Thinking, Effective Communication, Team Management, Cross-functional Collaboration, Rapid Learning, Curriculum Design
-
-PROJECTS:
-1. NLP-Based Travel Guide Chatbot (In Progress) — Conversational AI chatbot using tokenisation, embeddings, intent recognition for real-world travel queries.
-2. Movie Revenue Prediction & Recommendation System (Completed) — EDA + ML regression to predict revenue + Streamlit recommendation app using collaborative filtering. GitHub: https://github.com/yuvrajsinghshek/movie-recommendation-system-streamlit
-3. Laptop Price Prediction & Recommendation (Completed) — End-to-end ML pipeline + Streamlit app for real-time price estimation. GitHub: https://github.com/yuvrajsinghshek/laptop_price_prediction
-4. Hotel Booking Cancellation Analysis (Completed) — Data cleaning, EDA, statistical analysis to identify cancellation factors. GitHub: https://github.com/yuvrajsinghshek/Hotel-Booking-Analysis
-
-CERTIFICATIONS:
-1. Supervised Machine Learning: Regression and Classification — DeepLearning.AI & Stanford (Coursera), Aug 2025. Verify: https://coursera.org/verify/78DU92BUXHF2
-2. Advanced Learning Algorithms — DeepLearning.AI & Stanford (Coursera), Dec 2025. Verify: https://coursera.org/verify/BCRTR3DEB7HZ
-3. Unsupervised Learning, Recommenders & Reinforcement Learning — DeepLearning.AI & Stanford (Coursera), Feb 2026. Verify: https://coursera.org/verify/AWW31QH4ZMII
-4. Python (Basic) — HackerRank, Jul 2025
-5. SQL Basic — HackerRank, Jul 2025
-6. SQL Intermediate — HackerRank, Jul 2025
-7. SQL Advanced — HackerRank, Jul 2025
-8. Complete ML & Data Science Skill Up — GeeksforGeeks
-9. Data Analytics Virtual Experience — TATA (Forage)
-10. Financial Literacy Course for Bharat — NISM (SEBI), Jul 2025
-
-GOALS:
-- Become a skilled Data Scientist & Analyst
-- Solve real business problems using data-driven insights
-- Work on GenAI, NLP, and Computer Vision projects
-- Open to full-time roles and internships
-
-PERSONALITY:
-- Passionate about turning data into stories
-- Creative and analytical thinker
-- Strong communicator with good English (written & verbal)
-- Eager to learn and collaborate
-
-INSTRUCTIONS:
-- Be friendly, warm, and conversational
-- Answer questions about Yuvraj's skills, projects, education, experience, certifications
-- If asked about projects, mention the GitHub links
-- If asked about certificates, mention the verify links
-- Keep responses concise but informative (2-4 sentences max unless more detail is needed)
-- If someone asks something not related to Yuvraj's portfolio, politely redirect them
-- If someone wants to hire or contact Yuvraj, give his email and LinkedIn
-- Speak in a mix of professional and friendly tone
-- Use emojis occasionally to keep it engaging`;
+  // 5. Default Fallback
+  return "I don’t have access to that specific question. However, I can provide information about my boss, Yuvraj Singh Shekhawat, such as his projects, current role, education, and achievements.";
+};
 
 const DEFAULT_SUGGESTIONS = [
   "Skills & Tech Stack",
@@ -105,8 +139,6 @@ export default function Chatbot() {
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
 
-  const API_KEY = "AIzaSyCEXWtedgp7N_TwXNEiuWhWs4vFG6YqZvU";
-
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, loading]);
@@ -123,43 +155,13 @@ export default function Chatbot() {
     setMessages(newMessages);
     setLoading(true);
 
-    try {
-          let formattedContents = [];
-          for (const m of newMessages.slice(1)) {
-            const role = m.role === 'assistant' ? 'model' : 'user';
-            // Gemini strictly requires alternating roles and no consecutive duplicates
-            if (formattedContents.length > 0 && formattedContents[formattedContents.length - 1].role === role) {
-              formattedContents[formattedContents.length - 1].parts[0].text += '\n\n' + m.content;
-            } else {
-              formattedContents.push({ role, parts: [{ text: m.content }] });
-            }
-          }
-          // Ensure it starts with user
-          if (formattedContents.length > 0 && formattedContents[0].role === 'model') {
-             formattedContents.shift();
-          }
-
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${API_KEY}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          systemInstruction: {
-            parts: [{ text: SYSTEM_PROMPT }]
-          },
-          contents: formattedContents
-        }),
-      });
-      const data = await response.json();
-      if (!response.ok) { console.error("Gemini API Error:", data); }
-      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't get a response. Please try again.";
-      
+    // Simulate a small delay for better UX
+    setTimeout(() => {
+      const reply = getBotResponse(msg);
       setMessages(prev => [...prev, { role: 'assistant', content: reply }]);
+      setLoading(false);
       if (!open) setHasNew(true);
-    } catch {
-      setMessages(prev => [...prev, { role: 'assistant', content: "Oops! Something went wrong communicating with the API. Please try again in a moment 🙏" }]);
-      if (!open) setHasNew(true);
-    }
-    setLoading(false);
+    }, 600);
   };
 
   const handleKey = (e) => {
@@ -190,43 +192,54 @@ export default function Chatbot() {
 
   return (
     <>
-      <div
-        onClick={() => setOpen(o => !o)}
+      {/* Chat Icon/Toggle */}
+      <div 
+        onClick={() => setOpen(!open)}
         style={{
-          position: 'fixed', bottom: 28, left: 28, zIndex: 200,
-          width: 56, height: 56, borderRadius: '50%',
-          background: 'linear-gradient(135deg, var(--accent), #5b3fd4)',
-          boxShadow: open ? '0 8px 40px rgba(124,92,252,0.7)' : '0 8px 32px rgba(124,92,252,0.45)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          position: 'fixed',
+          bottom: '24px',
+          right: '24px',
+          zIndex: 1000,
+          width: '60px',
+          height: '60px',
+          borderRadius: '50%',
+          background: 'linear-gradient(135deg, var(--accent), var(--accent2))',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           cursor: 'pointer',
-          transition: 'all 0.3s',
-          transform: open ? 'rotate(0deg) scale(1.05)' : 'scale(1)',
+          boxShadow: '0 8px 32px rgba(124, 92, 252, 0.4)',
+          transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+          transform: open ? 'rotate(90deg) scale(0.9)' : 'none',
+          border: '2px solid rgba(255,255,255,0.1)'
         }}
       >
         {open ? (
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <span style={{ fontSize: '24px', color: '#fff' }}>×</span>
         ) : (
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h2a2 2 0 0 1 2 2v2h1a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-1v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h1V9a2 2 0 0 1 2-2h2V5.73A2 2 0 0 1 10 4a2 2 0 0 1 2-2z"/>
-            <path d="M9 13v-2"/>
-            <path d="M15 13v-2"/>
-            <path d="M9 17h6"/>
-          </svg>
+          <span style={{ fontSize: '28px' }}>🤖</span>
         )}
         {hasNew && !open && (
           <div style={{ position: 'absolute', top: 4, right: 4, width: 12, height: 12, borderRadius: '50%', background: 'var(--accent4)', border: '2px solid var(--bg)', animation: 'pulse 2s infinite' }} />
         )}
       </div>
 
+      {/* Chat Window */}
       <div style={{
-        position: 'fixed', bottom: 94, left: 28, zIndex: 199,
-        width: 330, height: 'min(480px, 65vh)',
+        position: 'fixed',
+        bottom: window.innerWidth < 480 ? '90px' : '100px',
+        right: window.innerWidth < 480 ? '4vw' : '24px',
+        width: 'min(420px, 92vw)',
+        height: 'min(600px, 75vh)',
+        maxHeight: 'calc(100vh - 120px)',
         background: 'var(--bg2)',
         border: '1px solid var(--border2)',
-        borderRadius: 24,
-        display: 'flex', flexDirection: 'column',
+        borderRadius: '24px',
+        display: 'flex',
+        flexDirection: 'column',
+        zIndex: 999,
+        boxShadow: '0 20px 80px rgba(0,0,0,0.5), var(--glow)',
         overflow: 'hidden',
-        boxShadow: '0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,92,252,0.1)',
         opacity: open ? 1 : 0,
         transform: open ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)',
         pointerEvents: open ? 'all' : 'none',

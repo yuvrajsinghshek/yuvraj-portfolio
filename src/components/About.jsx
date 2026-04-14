@@ -6,9 +6,9 @@ export default function About() {
   return (
     <section id="about" ref={ref} style={{ padding:'120px 0' }}>
       <div className="container">
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:80, alignItems:'center' }}>
+        <div className="mobile-grid-1" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:80, alignItems:'center' }}>
 
-          <div style={{ opacity:visible?1:0, transform:visible?'none':'translateX(-40px)', transition:'all 0.8s cubic-bezier(0.16,1,0.3,1)' }}>
+          <div style={{ opacity:visible?1:0, transform:visible?'none':(window.innerWidth < 768 ? 'translateY(40px)' : 'translateX(-40px)'), transition:'all 0.8s cubic-bezier(0.16,1,0.3,1)' }}>
             <p className="section-label">About Me</p>
             <h2 className="section-title">Turning <span className="glow-text">Data</span> into<br />Decisions</h2>
             <p style={{ color:'var(--text2)', lineHeight:1.8, marginBottom:20 }}>
@@ -27,10 +27,10 @@ export default function About() {
             </div>
           </div>
 
-          <div style={{ opacity:visible?1:0, transform:visible?'none':'translateX(40px)', transition:'all 0.8s 0.2s cubic-bezier(0.16,1,0.3,1)' }}>
+          <div style={{ opacity:visible?1:0, transform:visible?'none':(window.innerWidth < 768 ? 'translateY(40px)' : 'translateX(40px)'), transition:'all 0.8s 0.2s cubic-bezier(0.16,1,0.3,1)' }}>
 
 
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
+            <div className="mobile-grid-1" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
               {[
                 { icon:'🎓', label:'Education', value:'MCA — LPU', sub:'Data Science', color:'var(--accent)' },
                 { icon:'💼', label:'Experience', value:'1+ Year', sub:'WE RNS IT Solutions', color:'var(--accent2)' },

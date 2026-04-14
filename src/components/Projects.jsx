@@ -59,7 +59,7 @@ export default function Projects() {
         <h2 className="section-title">What I've <span className="glow-text">Built</span></h2>
         <p className="section-sub">End-to-end ML pipelines, deployed apps, and data systems.</p>
 
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(460px,1fr))', gap:20 }}>
+        <div className="mobile-grid-1" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(min(440px, 100%),1fr))', gap:20 }}>
           {projects.map((p,i)=>(
             <div key={p.id}
               onMouseEnter={()=>setHovered(p.id)}

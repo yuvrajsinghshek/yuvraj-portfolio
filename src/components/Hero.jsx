@@ -27,8 +27,8 @@ export default function Hero() {
       ))}
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 64, alignItems: 'center' }}>
-          <div>
+        <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 64, alignItems: 'center' }}>
+          <div style={{ textAlign: 'inherit' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px', borderRadius: 100, border: '1px solid rgba(0,255,136,0.3)', background: 'rgba(0,255,136,0.06)', marginBottom: 36, animation: 'fadeUp 0.6s ease forwards' }}>
               <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent4)', display: 'block', animation: 'pulse 2s infinite' }} />
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--accent4)', letterSpacing: '0.1em' }}>OPEN TO OPPORTUNITIES</span>
@@ -38,7 +38,7 @@ export default function Hero() {
               Yuvraj<br /><span className="glow-text">Singh</span>
             </h1>
 
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'clamp(16px,2.5vw,22px)', color: 'var(--text2)', marginBottom: 24, height: 34, display: 'flex', alignItems: 'center', animation: 'fadeUp 0.8s 0.2s ease both' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'clamp(16px,2.5vw,22px)', color: 'var(--text2)', marginBottom: 24, height: 34, display: 'flex', alignItems: 'center', justifyContent: 'inherit', animation: 'fadeUp 0.8s 0.2s ease both' }}>
               <span style={{ color: 'var(--accent)' }}>{'>'}</span>
               <span style={{ marginLeft: 10 }}>{role}</span>
               <span style={{ display: 'inline-block', width: 2, height: '1.1em', background: 'var(--accent2)', marginLeft: 2, animation: 'blink 1s step-start infinite' }} />
@@ -48,7 +48,7 @@ export default function Hero() {
               Aspiring Data Scientist with hands-on experience in ML, Deep Learning, and NLP. Building real-world AI applications from end-to-end pipelines to Streamlit deployments. Based in <span style={{ color: 'var(--text)' }}>Jaipur, Rajasthan</span>.
             </p>
 
-            <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', animation: 'fadeUp 0.8s 0.4s ease both' }}>
+            <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', justifyContent: 'inherit', animation: 'fadeUp 0.8s 0.4s ease both' }}>
               {[
                 { label: 'GitHub', href: 'https://github.com/yuvrajsinghshek', color: 'linear-gradient(135deg,var(--accent),#5b3fd4)', textColor: '#fff', shadow: '0 8px 32px rgba(124,92,252,0.4)', hoverShadow: '0 8px 48px rgba(124,92,252,0.6)' },
                 { label: 'LinkedIn', href: 'https://www.linkedin.com/in/yuvraj-singh-shekhawat-155719316', color: 'transparent', textColor: 'var(--accent2)', border: '1px solid rgba(0,229,255,0.3)' },
@@ -60,7 +60,7 @@ export default function Hero() {
               ))}
             </div>
 
-            <div style={{ display: 'flex', gap: 40, marginTop: 56, paddingTop: 40, borderTop: '1px solid var(--border)', animation: 'fadeUp 0.8s 0.5s ease both' }}>
+            <div style={{ display: 'flex', gap: 40, marginTop: 56, paddingTop: 40, borderTop: '1px solid var(--border)', flexWrap: 'wrap', justifyContent: 'inherit', animation: 'fadeUp 0.8s 0.5s ease both' }}>
               {[{ num: '4+', label: 'Projects Built' }, { num: '9+', label: 'Certifications' }, { num: '1+', label: 'Year Experience' }].map(s => (
                 <div key={s.label}>
                   <div style={{ fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 800, color: 'var(--text)', lineHeight: 1 }}>{s.num}</div>
@@ -71,8 +71,8 @@ export default function Hero() {
           </div>
 
           {/* Photo Card */}
-          <div style={{ position: 'relative', animation: 'fadeUp 0.8s 0.3s ease both' }}>
-            <div style={{ width: 280, height: 360, border: '1px solid var(--border2)', borderRadius: 24, background: 'var(--surface)', position: 'relative', overflow: 'hidden', boxShadow: 'var(--glow)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ position: 'relative', animation: 'fadeUp 0.8s 0.3s ease both', justifySelf: 'center' }}>
+            <div style={{ width: 'min(280px, 85vw)', height: 'height: min(360px, 450px)', minHeight: 360, border: '1px solid var(--border2)', borderRadius: 24, background: 'var(--surface)', position: 'relative', overflow: 'hidden', boxShadow: 'var(--glow)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
               <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 4, background: 'linear-gradient(90deg,transparent,rgba(0,229,255,0.4),transparent)', zIndex: 2, animation: 'scanline 4s linear infinite' }} />
 
               <div style={{ width: 140, height: 140, borderRadius: '50%', background: 'linear-gradient(135deg, var(--accent), var(--accent2))', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20, boxShadow: '0 0 40px rgba(0,229,255,0.3)', padding: 3 }}>
@@ -90,7 +90,7 @@ export default function Hero() {
               </div>
             </div>
             {[['-12px', '-12px'], ['-12px', '100%'], ['100%', '-12px'], ['100%', '100%']].map(([t, l], i) => (
-              <div key={i} style={{ position: 'absolute', top: t, left: l, width: 24, height: 24, borderRadius: '50%', background: 'var(--bg)', border: '2px solid var(--accent)', boxShadow: '0 0 12px var(--accent)' }} />
+              <div key={i} className="hide-on-mobile" style={{ position: 'absolute', top: t, left: l, width: 24, height: 24, borderRadius: '50%', background: 'var(--bg)', border: '2px solid var(--accent)', boxShadow: '0 0 12px var(--accent)' }} />
             ))}
           </div>
         </div>

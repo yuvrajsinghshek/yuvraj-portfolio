@@ -94,7 +94,7 @@ export default function Contact() {
         </div>
 
         {/* Contact links */}
-        <div style={{
+        <div className="mobile-grid-1" style={{
           display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16,
           marginBottom: 60,
         }}>
@@ -132,12 +132,12 @@ export default function Contact() {
         <div style={{
           borderTop: '1px solid var(--border)',
           paddingTop: 32,
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12,
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20,
         }}>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--text3)' }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--text3)', width: window.innerWidth < 480 ? '100%' : 'auto', textAlign: window.innerWidth < 480 ? 'center' : 'left' }}>
             © 2025 Yuvraj Singh Shekhawat
           </div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text3)' }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text3)', width: window.innerWidth < 480 ? '100%' : 'auto', textAlign: window.innerWidth < 480 ? 'center' : 'left' }}>
             Built with <span style={{ color: 'var(--accent)' }}>React</span> · Jaipur, India
           </div>
         </div>

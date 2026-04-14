@@ -85,7 +85,7 @@ export default function Certificates() {
         <h2 className="section-title">Verified <span className="glow-text">Credentials</span></h2>
         <p className="section-sub">Industry certifications from world-class institutions.</p>
 
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(230px,1fr))', gap:16 }}>
+        <div className="mobile-grid-1" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(230px,1fr))', gap:16 }}>
           {certs.map((c,i)=>(
             <div key={i}
               onMouseEnter={()=>setHovered(i)}
