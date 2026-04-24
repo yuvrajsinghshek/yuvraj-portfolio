@@ -4,6 +4,17 @@ import { useInView } from '../hooks/useInView';
 const projects = [
   {
     id: 1, num: '01',
+    title: 'SamvaadAI',
+    status: 'Completed', statusColor: 'var(--accent2)',
+    desc: 'A premium, multi-modal AI platform for intelligent text conversations, image analysis, and AI image generation (Artisan). Features include context-aware chat, visual insights, and a glassmorphism UI.',
+    tech: ['React 19', 'Vite', 'Tailwind CSS', 'Framer Motion', 'Hugging Face API'],
+    color: 'var(--accent)',
+    gradient: 'linear-gradient(135deg,rgba(124,92,252,0.15),rgba(0,229,255,0.08))',
+    icon: '🧠',
+    github: 'https://github.com/yuvrajsinghshek/samvaadai.git',
+  },
+  {
+    id: 2, num: '02',
     title: 'NLP-Based Travel Guide Chatbot',
     status: 'In Progress', statusColor: 'var(--accent4)',
     desc: 'Building a conversational AI chatbot using NLP techniques including tokenisation, embeddings, and intent recognition to answer real-world travel queries. Demonstrates applied GenAI and NLP skills.',
@@ -14,7 +25,7 @@ const projects = [
     github: null,
   },
   {
-    id: 2, num: '02',
+    id: 3, num: '03',
     title: 'Movie Revenue Prediction & Recommendation System',
     status: 'Completed', statusColor: 'var(--accent2)',
     desc: 'EDA on movie datasets with ML regression models to predict revenue. Streamlit-based recommendation system using collaborative filtering — full end-to-end ML pipeline from data cleaning to deployment.',
@@ -25,7 +36,7 @@ const projects = [
     github: 'https://github.com/yuvrajsinghshek/movie-recommendation-system-streamlit',
   },
   {
-    id: 3, num: '03',
+    id: 4, num: '04',
     title: 'Laptop Price Prediction & Recommendation',
     status: 'Completed', statusColor: 'var(--accent2)',
     desc: 'End-to-end ML pipeline for price prediction deployed as a Streamlit app for real-time estimation and recommendations. Demonstrates hands-on Python, ML modelling, and deployment skills.',
@@ -36,7 +47,7 @@ const projects = [
     github: 'https://github.com/yuvrajsinghshek/laptop_price_prediction',
   },
   {
-    id: 4, num: '04',
+    id: 5, num: '05',
     title: 'Hotel Booking Cancellation Analysis',
     status: 'Completed', statusColor: 'var(--accent2)',
     desc: 'Data cleaning, EDA, and statistical insight analysis to identify key factors driving cancellations. Produced structured case study material suitable for data analytics curriculum.',
