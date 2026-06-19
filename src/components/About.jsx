@@ -12,16 +12,16 @@ export default function About() {
             <p className="section-label">About Me</p>
             <h2 className="section-title">Turning <span className="glow-text">Data</span> into<br />Decisions</h2>
             <p style={{ color:'var(--text2)', lineHeight:1.8, marginBottom:20 }}>
-              I'm <strong style={{ color:'var(--text)' }}>Yuvraj Singh Shekhawat</strong>, a Data Science trainee at WE RNS IT Solutions Pvt. Ltd. and currently pursuing my MCA from Lovely Professional University.
+              I'm <strong style={{ color:'var(--text)' }}>Yuvraj Singh Shekhawat</strong>, an AI/ML Engineer and Data Scientist with hands-on experience building production-grade generative AI systems.
             </p>
             <p style={{ color:'var(--text2)', lineHeight:1.8, marginBottom:20 }}>
-              With a background in PCM and BA, I bring both <span style={{ color:'var(--accent)' }}>analytical precision</span> and creative thinking to solving data problems. I specialize in building end-to-end ML pipelines, NLP systems, and interactive dashboards.
+              I specialize in engineering <span style={{ color:'var(--accent)' }}>LangChain workflows</span>, prompt orchestration, and RAG pipelines. I have a proven track record of developing custom AI agents for distinct user personas and deploying scalable REST API endpoints via FastAPI.
             </p>
             <p style={{ color:'var(--text2)', lineHeight:1.8, marginBottom:40 }}>
-              My goal is to become a skilled Data Scientist & Analyst — solving real business problems using data-driven insights and modern AI techniques.
+              My goal is to engineer state-of-the-art AI solutions — solving real business problems using intelligent automation, LLMs, and data-driven insights.
             </p>
             <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
-              {['Python','Machine Learning','Deep Learning','NLP','SQL','Power BI','Tableau','Streamlit'].map((s,i)=>(
+              {['LangChain','RAG Pipelines','Prompt Engineering','Groq API','FastAPI','Vector Databases','Python','SQL'].map((s,i)=>(
                 <span key={s} className={`tag ${i%4===1?'tag-cyan':i%4===2?'tag-green':i%4===3?'tag-red':''}`}>{s}</span>
               ))}
             </div>

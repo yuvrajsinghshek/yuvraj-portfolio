@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const roles = ['Data Scientist', 'Data Analyst', 'ML Engineer'];
+const roles = ['AI/ML Engineer', 'Data Scientist', 'Generative AI Expert'];
 
 function useTypewriter(words, speed = 80, pause = 1800) {
   const [display, setDisplay] = useState('');
@@ -45,7 +45,7 @@ export default function Hero() {
             </div>
 
             <p style={{ fontSize: 17, color: 'var(--text2)', maxWidth: 520, lineHeight: 1.7, marginBottom: 44, animation: 'fadeUp 0.8s 0.3s ease both' }}>
-              Aspiring Data Scientist with hands-on experience in ML, Deep Learning, and NLP. Building real-world AI applications from end-to-end pipelines to Streamlit deployments. Based in <span style={{ color: 'var(--text)' }}>Jaipur, Rajasthan</span>.
+              AI/ML Engineer and Data Scientist with hands-on experience in building scalable generative AI systems, RAG pipelines, and intelligent agent architectures. Based in <span style={{ color: 'var(--text)' }}>Jaipur, Rajasthan</span>.
             </p>
 
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', justifyContent: 'inherit', animation: 'fadeUp 0.8s 0.4s ease both' }}>

@@ -3,56 +3,53 @@ import { useInView } from '../hooks/useInView';
 
 const skillGroups = [
   {
+    label: 'Generative AI & LLMs',
+    color: 'var(--accent2)',
+    skills: [
+      { name: 'RAG Pipelines', level: 90 },
+      { name: 'LangChain', level: 85 },
+      { name: 'Prompt Engineering', level: 90 },
+      { name: 'Vector Databases', level: 85 },
+    ],
+  },
+  {
     label: 'Languages & Databases',
     color: 'var(--accent)',
     skills: [
       { name: 'Python', level: 90 },
-      { name: 'SQL (MySQL / PostgreSQL)', level: 82 },
-      { name: 'C', level: 75 },
-      { name: 'JavaScript', level: 72 },
-      { name: 'HTML', level: 92 },
-      { name: 'CSS', level: 90 },
-    ],
-  },
-  {
-    label: 'ML / DL / NLP',
-    color: 'var(--accent2)',
-    skills: [
-      { name: 'Machine Learning', level: 85 },
-      { name: 'Deep Learning', level: 75 },
-      { name: 'Natural Language Processing', level: 78 },
-      { name: 'Transformers / LLMs', level: 65 },
+      { name: 'SQL (PostgreSQL / MySQL)', level: 85 },
+      { name: 'MongoDB', level: 75 },
+      { name: 'JavaScript / HTML / CSS', level: 80 },
     ],
   },
   {
     label: 'Frameworks & Tools',
     color: 'var(--accent4)',
     skills: [
-      { name: 'NumPy / Pandas', level: 88 },
-      { name: 'Scikit-learn', level: 88 },
-      { name: 'TensorFlow', level: 70 },
-      { name: 'Streamlit', level: 82 },
-      { name: 'Git / GitHub', level: 80 },
+      { name: 'FastAPI', level: 85 },
+      { name: 'Streamlit', level: 88 },
+      { name: 'Docker / Railway', level: 80 },
+      { name: 'Git / GitHub', level: 85 },
     ],
   },
   {
-    label: 'Data & Visualization',
+    label: 'ML & Data Science',
     color: 'var(--accent3)',
     skills: [
-      { name: 'Power BI', level: 78 },
-      { name: 'Tableau', level: 72 },
-      { name: 'Matplotlib / Seaborn', level: 85 },
-      { name: 'MS Excel / EDA', level: 80 },
+      { name: 'Machine Learning', level: 85 },
+      { name: 'NumPy / Pandas', level: 88 },
+      { name: 'Scikit-learn / XGBoost', level: 85 },
+      { name: 'Power BI / EDA', level: 80 },
     ],
   },
 ];
 
 const techBadges = [
-  'Python', 'C', 'JavaScript', 'HTML', 'CSS',
-  'NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'Scikit-learn', 'SciPy',
-  'TensorFlow', 'Streamlit', 'Jupyter', 'Git', 'GitHub',
-  'MySQL', 'PostgreSQL', 'Power BI', 'Tableau', 'MS Excel',
-  'NLP', 'Transformers', 'Computer Vision',
+  'LangChain', 'RAG', 'Prompt Engineering', 'Groq API', 'ChromaDB', 'Supabase', 
+  'sentence-transformers', 'Python', 'FastAPI', 'PostgreSQL', 'MySQL', 'MongoDB', 
+  'Machine Learning', 'Deep Learning', 'NLP', 'Scikit-learn', 'PyTorch', 'TensorFlow', 
+  'XGBoost', 'NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'Streamlit', 
+  'Docker', 'Railway', 'Git', 'GitHub', 'Power BI', 'MS Excel'
 ];
 
 function SkillBar({ name, level, color, animate }) {
