@@ -6,40 +6,65 @@ const skillGroups = [
     label: 'Generative AI & LLMs',
     color: 'var(--accent2)',
     skills: [
-      { name: 'RAG Pipelines', level: 90 },
-      { name: 'LangChain', level: 85 },
+      { name: 'LangChain / RAG', level: 90 },
       { name: 'Prompt Engineering', level: 90 },
       { name: 'Vector Databases', level: 85 },
+      { name: 'Groq API / Transformers', level: 85 },
     ],
   },
   {
-    label: 'Languages & Databases',
+    label: 'Programming & Databases',
     color: 'var(--accent)',
     skills: [
       { name: 'Python', level: 90 },
-      { name: 'SQL (PostgreSQL / MySQL)', level: 85 },
+      { name: 'SQL (MySQL, PostgreSQL)', level: 85 },
       { name: 'MongoDB', level: 75 },
-      { name: 'JavaScript / HTML / CSS', level: 80 },
+    ],
+  },
+  {
+    label: 'Machine Learning / DL',
+    color: 'var(--accent4)',
+    skills: [
+      { name: 'Scikit-learn', level: 85 },
+      { name: 'PyTorch / TensorFlow', level: 75 },
+      { name: 'XGBoost', level: 80 },
+    ],
+  },
+  {
+    label: 'Data Analysis',
+    color: 'var(--accent3)',
+    skills: [
+      { name: 'NumPy / Pandas', level: 88 },
+      { name: 'Matplotlib / Seaborn', level: 85 },
+      { name: 'EDA / Stats Analysis', level: 82 },
     ],
   },
   {
     label: 'Frameworks & Tools',
-    color: 'var(--accent4)',
+    color: '#00e5ff',
     skills: [
-      { name: 'FastAPI', level: 85 },
+      { name: 'FastAPI / REST API', level: 85 },
       { name: 'Streamlit', level: 88 },
       { name: 'Docker / Railway', level: 80 },
       { name: 'Git / GitHub', level: 85 },
     ],
   },
   {
-    label: 'ML & Data Science',
-    color: 'var(--accent3)',
+    label: 'Business Intelligence',
+    color: '#7c5cfc',
     skills: [
-      { name: 'Machine Learning', level: 85 },
-      { name: 'NumPy / Pandas', level: 88 },
-      { name: 'Scikit-learn / XGBoost', level: 85 },
-      { name: 'Power BI / EDA', level: 80 },
+      { name: 'Power BI', level: 80 },
+      { name: 'Streamlit Dashboards', level: 85 },
+      { name: 'MS Excel (Advanced)', level: 85 },
+    ],
+  },
+  {
+    label: 'Core Competencies',
+    color: '#ff6b6b',
+    skills: [
+      { name: 'Problem Solving', level: 90 },
+      { name: 'Analytical Thinking', level: 88 },
+      { name: 'Rapid Learning', level: 90 },
     ],
   },
 ];
