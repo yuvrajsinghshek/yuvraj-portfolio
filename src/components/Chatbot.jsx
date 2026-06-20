@@ -11,11 +11,19 @@ const KNOWLEDGE_BASE = {
   },
   about: {
     keywords: ['who is yuvraj', 'about yuvraj', 'tell me about him', 'yuvraj singh shekhawat'],
-    response: "Yuvraj Singh Shekhawat is an aspiring **Data Scientist** and **MCA (Data Science)** student at Lovely Professional University. He is passionate about turning data into stories and solving business problems with AI. Currently, he is a Data Science Trainee at WE RNS IT Solutions."
+    response: "Yuvraj Singh Shekhawat is a **Data Scientist** currently working at WE RNS IT Solutions Pvt. Ltd. He is passionate about GenAI, LLMs, and solving complex problems. He is also pursuing an MCA in Data Science at LPU."
   },
-  project_nlp: {
-    keywords: ['travel', 'guid', 'nlp chatbot'],
-    response: "Yuvraj's **NLP-Based Travel Guide Chatbot** uses tokenisation, embeddings, and intent recognition to assist users with travel queries. It's a great example of his work in Conversational AI."
+  project_nyayaai: {
+    keywords: ['nyayaai', 'cybercrime', 'rag chatbot', 'nyaya'],
+    response: "Yuvraj engineered **NyayaAI**, a Live production-grade RAG chatbot for cybercrime awareness. It uses FastAPI, ChromaDB, Groq LLM, and Streamlit. [View Live](https://nyayaai-a2z49n3tw6egxbixarud5u.streamlit.app/) | [GitHub](https://github.com/yuvrajsinghshek/NyayaAI)"
+  },
+  project_language: {
+    keywords: ['languagesikho', 'language', 'sikho', 'learning platform'],
+    response: "He collaborated on **LanguageSikhoAI**, an end-to-end AI language learning platform featuring 5 distinct persona-based agents built with LangChain, Groq, and Supabase."
+  },
+  project_samvaadai: {
+    keywords: ['samvaadai', 'samvaad', 'image generation', 'multi-modal'],
+    response: "Yuvraj built **SamvaadAI**, a premium multi-modal AI platform for intelligent text conversations and AI image generation using React 19, Vite, and Hugging Face."
   },
   project_movie: {
     keywords: ['movie', 'revenue', 'recommend'],
@@ -37,21 +45,25 @@ const KNOWLEDGE_BASE = {
     keywords: ['sql', 'mysql', 'postgre', 'database'],
     response: "Yuvraj has master-level **SQL** skills (MySQL, PostgreSQL) and is certified from HackerRank across all levels (Basic to Advanced)."
   },
+  skill_genai: {
+    keywords: ['genai', 'generative ai', 'llm', 'langchain', 'rag', 'groq', 'prompt engineering'],
+    response: "Yuvraj is an expert in **Generative AI & LLMs**. He actively uses LangChain, RAG pipelines, Vector Databases (ChromaDB, Supabase), and the Groq API."
+  },
   skill_ml: {
-    keywords: ['ml', 'machine learning', 'deep learning', 'nlp', 'vision', 'transformer', 'llm', 'frameworks & tools'],
-    response: "Yuvraj specializes in **AI & ML**, including Deep Learning, NLP (Transformers/LLMs), and frameworks like TensorFlow. He is also skilled in data visualization using Power BI and Tableau."
+    keywords: ['ml', 'machine learning', 'deep learning', 'nlp', 'vision', 'transformer', 'frameworks & tools'],
+    response: "Yuvraj specializes in **AI & ML**, including Scikit-learn, PyTorch, TensorFlow, and XGBoost. He deploys solutions using FastAPI, Streamlit, and Docker."
   },
   skills: {
     keywords: ['skill', 'tech', 'stack', 'language', 'data science'],
-    response: "Yuvraj is a multi-talented Data Scientist with expertise in Python, SQL, Machine Learning, and NLP. He uses a variety of tools like TensorFlow, Power BI, and Tableau to solve problems."
+    response: "Yuvraj's tech stack includes Generative AI (LangChain, RAG), Python, SQL, Machine Learning (PyTorch, TensorFlow), Data Analysis, and backend frameworks like FastAPI."
   },
   projects: {
     keywords: ['project', 'github', 'work'],
-    response: "Yuvraj has completed several projects including Movie Revenue Prediction, Laptop Price Predictor, and Hotel Booking Analysis. You can explore all of them on his [GitHub](https://github.com/yuvrajsinghshek)!"
+    response: "Yuvraj has engineered advanced GenAI projects like NyayaAI (Live RAG Chatbot), LanguageSikhoAI, and SamvaadAI, alongside ML pipelines. Explore them on his [GitHub](https://github.com/yuvrajsinghshek)!"
   },
   experience: {
     keywords: ['experience', 'work', 'job', 'internship', 'rns', 'role', 'responsibilities'],
-    response: "Currently, Yuvraj is a **Data Science Trainee** at **WE RNS IT Solutions Pvt. Ltd.** in Jaipur. He focuses on data-driven projects and has prior experience in collaborative environments."
+    response: "Yuvraj is currently working as a **Data Scientist** at **WE RNS IT Solutions Pvt. Ltd.** in Jaipur. He architects RAG-based systems and custom AI agents for products like LanguageSikhoAI and NyayaAI."
   },
   education: {
     keywords: ['education', 'college', 'university', 'mca', 'degree', 'ba', 'school', 'previous degrees', 'mca details'],
@@ -82,8 +94,8 @@ const getBotResponse = (input) => {
 
   // 3. Check for specific projects and skills
   const specificCategories = [
-    'project_nlp', 'project_movie', 'project_laptop', 'project_hotel',
-    'skill_python', 'skill_sql', 'skill_ml'
+    'project_nyayaai', 'project_language', 'project_samvaadai', 'project_movie', 'project_laptop', 'project_hotel',
+    'skill_python', 'skill_sql', 'skill_ml', 'skill_genai'
   ];
   for (const cat of specificCategories) {
     if (KNOWLEDGE_BASE[cat].keywords.some(k => text.includes(k))) {
@@ -171,9 +183,9 @@ export default function Chatbot() {
   let activeSuggestions = DEFAULT_SUGGESTIONS;
   const lastUserMsg = [...messages].reverse().find(m => m.role === 'user')?.content.toLowerCase() || '';
   if (lastUserMsg.includes('project')) {
-    activeSuggestions = ["NLP Travel Guide", "Movie Predictor", "Laptop Price Predictor", "Hotel Booking Analysis", "Back to Menu"];
+    activeSuggestions = ["NyayaAI", "LanguageSikhoAI", "SamvaadAI", "Back to Menu"];
   } else if (lastUserMsg.includes('skill') || lastUserMsg.includes('tech')) {
-    activeSuggestions = ["Programming", "ML/DL/NLP", "Frameworks & Tools", "Back to Menu"];
+    activeSuggestions = ["Generative AI", "Programming", "ML/DL/NLP", "Back to Menu"];
   } else if (lastUserMsg.includes('experience')) {
     activeSuggestions = ["Role at WE RNS", "Responsibilities", "Back to Menu"];
   } else if (lastUserMsg.includes('contact') || lastUserMsg.includes('hire')) {
